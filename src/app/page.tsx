@@ -1,5 +1,3 @@
-import { IMAGES } from "@/assets";
-import Image from "next/image";
 import React from "react";
 
 const Page = () => {
@@ -18,12 +16,20 @@ const Page = () => {
         >
           Download for Windows
         </a>
-        <a
-          href=""
-          className="rounded-md bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
-        >
-          Download for Mac
-        </a>
+        <div className="relative">
+          <a
+            className="cursor-default rounded-md bg-gray-500 px-4 py-2 text-white opacity-60"
+            aria-disabled="true"
+          >
+            Download for Mac
+          </a>
+
+          <div className="absolute -right-5 -top-5">
+            <span className="rounded-full bg-red-500 px-2 py-1 text-xs text-white">
+              Coming soon🔥
+            </span>
+          </div>
+        </div>
       </div>
     </main>
   );
