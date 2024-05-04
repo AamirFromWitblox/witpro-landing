@@ -4,9 +4,9 @@ import { HeroHighlight } from "@/components/hero-highlight";
 import React from "react";
 
 const windows_download_link =
-  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.7-setup.exe?alt=media&token=4bb91cb5-c90a-4cda-afc9-0f29df35a089";
+  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.8-setup.exe?alt=media&token=cd77de23-e6cc-4dba-94d6-035f0e2de293";
 const mac_download_link =
-  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.7.dmg?alt=media&token=fe091da0-d444-4b0a-9cad-0e6b8b40757a";
+  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.8.dmg?alt=media&token=10a1eb6d-0951-4458-895b-d33c8cba3a74";
 
 const Page = async () => {
   return (
