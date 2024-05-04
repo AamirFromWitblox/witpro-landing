@@ -11,7 +11,10 @@ const mac_download_link =
 const Page = async () => {
   return (
     <>
-      <HeroHighlight className="flex h-screen flex-col items-center justify-center p-2">
+      <HeroHighlight
+        containerClassName="h-screen"
+        className="flex flex-col items-center justify-center p-2"
+      >
         <h1 className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-center text-8xl font-bold text-transparent">
           Wit-Pro
         </h1>
