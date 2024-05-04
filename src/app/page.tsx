@@ -1,7 +1,14 @@
+"use server";
+
 import { HeroHighlight } from "@/components/hero-highlight";
 import React from "react";
 
-const Page = () => {
+const windows_download_link =
+  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.7-setup.exe?alt=media&token=4bb91cb5-c90a-4cda-afc9-0f29df35a089";
+const mac_download_link =
+  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.7.dmg?alt=media&token=fe091da0-d444-4b0a-9cad-0e6b8b40757a";
+
+const Page = async () => {
   return (
     <>
       <HeroHighlight className="flex h-screen flex-col items-center justify-center p-2">
@@ -15,25 +22,19 @@ const Page = () => {
 
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
           <a
-            href=""
+            href={windows_download_link}
             className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            download={true}
           >
             Download for Windows
           </a>
-          <div className="relative">
-            <a
-              className="cursor-default rounded-md bg-gray-500 px-4 py-2 text-white opacity-60"
-              aria-disabled="true"
-            >
-              Download for Mac
-            </a>
-
-            <div className="absolute -right-5 -top-5">
-              <span className="rounded-full bg-red-500 px-2 py-1 text-xs text-white">
-                Coming soon🔥
-              </span>
-            </div>
-          </div>
+          <a
+            href={mac_download_link}
+            className="rounded-md bg-gray-500 px-4 py-2 text-white"
+            download={true}
+          >
+            Download for Mac
+          </a>
         </div>
       </HeroHighlight>
     </>
