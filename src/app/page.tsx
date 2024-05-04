@@ -25,6 +25,8 @@ const Page = async () => {
             href={windows_download_link}
             className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
             download={true}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             Download for Windows
           </a>
@@ -32,6 +34,8 @@ const Page = async () => {
             href={mac_download_link}
             className="rounded-md bg-gray-500 px-4 py-2 text-white"
             download={true}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             Download for Mac
           </a>
