@@ -15,6 +15,16 @@ const Page = async () => {
         containerClassName="h-screen"
         className="flex flex-col items-center justify-center p-2"
       >
+        <div className="fixed right-2 top-4">
+          <a
+            href="https://www.notion.so/Wit-Pro-Issues-7818787444f2452aab13f684e6367aba"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="px-4 py-2 underline">Having trouble?</span>
+          </a>
+        </div>
+
         <h1 className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-center text-8xl font-bold text-transparent">
           Wit-Pro
         </h1>
