@@ -17,7 +17,7 @@ const Page = async () => {
       >
         <div className="fixed right-2 top-4">
           <a
-            href="https://www.notion.so/Wit-Pro-Issues-7818787444f2452aab13f684e6367aba"
+            href="https://invented-milkshake-1ae.notion.site/Wit-Pro-Issues-7818787444f2452aab13f684e6367aba?pvs=4"
             target="_blank"
             rel="noopener noreferrer"
           >
