@@ -1,0 +1,12 @@
+{
+  "verify": "Verify",
+  "verifyTooltip": "Verify the syntax",
+  "upload": "Upload",
+  "uploadTooltip": "Upload the code to the board",
+  "goBack": "Go Back",
+  "sourceCode": "Source Code",
+  "selectThePins": "Select the pins",
+  "selectThePinsText": "Select the pins you want to use for the Arduino board. You can change the pins later.",
+  "save": "Save",
+  "skip": "Skip"
+}

@@ -8,14 +8,6 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -30,4 +22,64 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.bg-pattern {
+  position: relative;
+  height: 100vh;
+}
+
+.bg-pattern::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background: url(/src/assets/images/bg.jpg) repeat center center/contain;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.blocklyToolboxDiv {
+  @apply bg-white text-black shadow-xl;
+}
+
+.blocklyFlyout {
+  @apply overflow-hidden;
+}
+
+.blocklyFlyoutScrollbar {
+  @apply hidden;
+}
+
+.blocklySvg {
+  @apply h-full;
+}
+
+.blocklyTreeLabel {
+  @apply p-2;
+}
+.blocklyToolboxContents {
+  @apply p-2;
+}
+
+.blocklyToolboxCategory {
+  @apply my-1 rounded-md border-2 p-0;
+}
+
+.blocklyTreeRow {
+  height: initial;
+  @apply m-0 flex items-center justify-center rounded-md p-2;
+}
+
+.blocklyTreeRow:has(input[type="search"]) {
+  @apply p-0;
+}
+
+.blocklyTreeSelected:has(input[type="search"]) {
+  background: none !important;
+}
+
+.blocklyTreeRow input[type="search"] {
+  @apply p-2 outline-none;
 }

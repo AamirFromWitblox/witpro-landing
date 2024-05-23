@@ -1,0 +1,20 @@
+{
+  "settings": "सेटिंग्स",
+  "languagePreference": "भाषा प्राथमिकता",
+  "theme": "थीम",
+  "projects": "परियोजनाएं",
+  "createNewProject": "नई परियोजना बनाएं",
+  "newProject": "नई परियोजना",
+  "titleText": "अपनी परियोजन का एक शीर्षक दें, ताकि आप बाद में संपादन कर सकें।",
+  "projectTitle": "परियोजना शीर्षक",
+  "close": "बंद करे",
+  "create": "बनाएं",
+  "projectName": "परियोजना का नाम",
+  "lastModified": "अंतिम संशोधित",
+  "actions": "कार्रवाई",
+  "open": "खोलें",
+  "delete": "हटाएं",
+  "deleteProject": "परियोजना हटाएं",
+  "deleteProjectText": "क्या आप वाकई इस परियोजना को हटाना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती।",
+  "templates": "नमूने"
+}
