@@ -4,7 +4,7 @@ import { HeroHighlight } from "@/components/hero-highlight";
 import React from "react";
 
 const windows_download_link =
-  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.9-setup.exe?alt=media&token=e52136b3-26ea-46f3-be09-09554c13c5ea";
+  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-1.0.1-setup.exe?alt=media&token=fd2c4a2f-e622-4705-a3b8-c4065f12d343";
 const mac_download_link =
   "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.8.dmg?alt=media&token=10a1eb6d-0951-4458-895b-d33c8cba3a74";
 
@@ -15,7 +15,7 @@ const Page = async () => {
         containerClassName="h-screen"
         className="flex flex-col items-center justify-center p-2"
       >
-        <div className="fixed right-2 top-4">
+        {/* <div className="fixed right-2 top-4">
           <a
             href="https://invented-milkshake-1ae.notion.site/Wit-Pro-Issues-7818787444f2452aab13f684e6367aba?pvs=4"
             target="_blank"
@@ -23,7 +23,7 @@ const Page = async () => {
           >
             <span className="px-4 py-2 underline">Having trouble?</span>
           </a>
-        </div>
+        </div> */}
 
         <h1 className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-center text-8xl font-bold text-transparent">
           Wit-Pro
