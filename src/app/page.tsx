@@ -4,7 +4,7 @@ import { HeroHighlight } from "@/components/hero-highlight";
 import React from "react";
 
 const windows_download_link =
-  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-1.0.1-setup.exe?alt=media&token=fd2c4a2f-e622-4705-a3b8-c4065f12d343";
+  "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-1.0.2-setup.exe?alt=media&token=788a0e04-cbe7-4637-b03f-cb89462f1ce2";
 const mac_download_link =
   "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.8.dmg?alt=media&token=10a1eb6d-0951-4458-895b-d33c8cba3a74";
 
