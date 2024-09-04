@@ -1,0 +1,290 @@
+### 1. **digital_write**
+
+- **Name**: digital_write
+- **Description**: This block is used to set a digital pin to a specified state (HIGH or LOW).
+- **Required Fields**:
+  - `pinType`: Specifies the state to set the digital pin to, either HIGH or LOW.
+    - **Type**: `String`
+    - **Options**: "HIGH", "LOW"
+- **Attachments**:
+  - `pinNumber`: Input block to specify the pin number. It can be a `get_variable` block or a `math_number` block.
+
+### 2. **digital_read**
+
+- **Name**: digital_read
+- **Description**: This block reads the state of a digital pin (HIGH or LOW).
+- **Required Fields**: None.
+- **Attachments**:
+  - `pinNumber`: Input block to specify the pin number to read from. It can be a `get_variable` block or a `math_number` block.
+
+### 3. **analog_write**
+
+- **Name**: analog_write
+- **Description**: This block is used to write an analog value (PWM wave) to a specific pin.
+- **Required Fields**: None.
+- **Attachments**:
+  - `pinNumber`: Input block to specify the pin number. It can be a `get_variable` block or a `math_number` block.
+  - `intensity`: Input block to specify the intensity (a value between 0-255). It can be a `get_variable` block, `math_number` block, or other arithmetic blocks.
+
+### 4. **analog_read**
+
+- **Name**: analog_read
+- **Description**: This block reads the value from an analog pin (a value between 0-1023).
+- **Required Fields**: None.
+- **Attachments**:
+  - `pinNumber`: Input block to specify the analog pin number to read from. It can be a `get_variable` block or a `math_number` block.
+
+### 5. **pinmode**
+
+- **Name**: pinmode
+- **Description**: This block sets a specified pin to either INPUT or OUTPUT mode.
+- **Required Fields**:
+  - `pinType`: Specifies the mode of the pin, either INPUT or OUTPUT.
+    - **Type**: `String`
+    - **Options**: "INPUT", "OUTPUT"
+- **Attachments**:
+  - `variable`: Input block to specify the pin number. It can be a `get_variable` block or a `math_number` block.
+
+### 6. **delay**
+
+- **Name**: delay
+- **Description**: This block pauses the program for a specified duration (in milliseconds).
+- **Required Fields**:
+  - `delay`: Specifies the amount of delay in milliseconds.
+    - **Type**: `int`
+- **Attachments**: None.
+
+### 7. **setup_and_loop**
+
+- **Name**: setup_and_loop
+- **Description**: This block defines the `setup()` and `loop()` functions of an Arduino sketch. The `setup()` function is run once when the program starts, and the `loop()` function is run repeatedly after that.
+- **Required Fields**: None.
+- **Attachments**:
+  - `SETUP_CODE`: Input block to specify the code that will run in the `setup()` function.
+  - `LOOP_CODE`: Input block to specify the code that will run in the `loop()` function.
+
+### 8. **variables_get**
+
+- **Name**: variables_get
+- **Description**: Retrieves the value of a specified variable.
+- **Required Fields**:
+  - `VAR`: The ID of the variable to get the value from.
+    - **Type**: `String`
+- **Attachments**: None
+
+### 9. **variables_set**
+
+- **Name**: variables_set
+- **Description**: Sets the value of a specified variable.
+- **Required Fields**:
+  - `VAR`: The ID of the variable to set.
+    - **Type**: `String`
+- **Attachments**:
+  - `VALUE`: The value to assign to the variable. This can be any block that returns a value.
+
+### 10. **math_change**
+
+- **Name**: math_change
+- **Description**: Changes the value of a variable by a specified amount (e.g., incrementing or decrementing).
+- **Required Fields**:
+  - `VAR`: The ID of the variable to change.
+    - **Type**: `String`
+- **Attachments**:
+  - `DELTA`: The value by which to change the variable. This can be any block that returns a value.
+
+### 11. **declare_string**
+
+- **Name**: declare_string
+- **Description**: Declares a new string variable and assigns a value to it.
+- **Required Fields**:
+  - `variable_name`: The name of the string variable.
+    - **Type**: `String`
+- **Attachments**:
+  - `i`: The value to assign to the string variable. This can be any block that returns a value.
+
+### 12. **label**
+
+- **Name**: label
+- **Description**: Creates a label with a specified name.
+- **Required Fields**:
+  - `label`: The name of the label.
+    - **Type**: `String`
+- **Attachments**: None
+
+### 13. **serial_available**
+
+- **Name**: serial_available
+- **Description**: Checks if data is available to read from the serial port.
+- **Required Fields**: None
+- **Attachments**: None
+
+### 14. **serial_begin**
+
+- **Name**: serial_begin
+- **Description**: Initializes the serial communication at a baud rate of 9600.
+- **Required Fields**: None
+- **Attachments**: None
+
+### 15. **serial_flush**
+
+- **Name**: serial_flush
+- **Description**: Waits for the transmission of outgoing serial data to complete.
+- **Required Fields**: None
+- **Attachments**: None
+
+### 16. **serial_print**
+
+- **Name**: serial_print
+- **Description**: Sends data to the serial port as human-readable ASCII text.
+- **Required Fields**: None
+- **Attachments**:
+  - `print_value`: The value to be printed. This can be any block that returns a value.
+
+### 17. **serial_println**
+
+- **Name**: serial_println
+- **Description**: Sends data to the serial port followed by a newline character.
+- **Required Fields**: None
+- **Attachments**:
+  - `print_value`: The value to be printed followed by a newline. This can be any block that returns a value.
+
+### 18. **math_number**
+
+- **Name**: math_number
+- **Description**: Represents a numeric value.
+- **Required Fields**:
+  - `NUM`: The numeric value.
+    - **Type**: `Number`
+- **Attachments**: None
+
+### 19. **math_arithmetic**
+
+- **Name**: math_arithmetic
+- **Description**: Performs basic arithmetic operations between two numbers.
+- **Required Fields**:
+  - `OP`: The arithmetic operation (ADD, MINUS, MULTIPLY, DIVIDE, POWER).
+    - **Type**: `String`
+- **Attachments**:
+  - `A`: The first operand. This can be any block that returns a value.
+  - `B`: The second operand. This can be any block that returns a value.
+
+### 20. **math_number_property**
+
+- **Name**: math_number_property
+- **Description**: Checks properties of a number, such as whether it is even, odd, prime, etc.
+- **Required Fields**:
+  - `OP`: The operation (ROUND, ROUNDUP, ROUNDDOWN).
+    - **Type**: `String`
+- **Attachments**:
+  - `NUM`: The number to check. This can be any block that returns a value.
+
+### 21. **math_round**
+
+- **Name**: math_round
+- **Description**: Rounds a number to the nearest integer, up, or down.
+- **Required Fields**:
+  - `OP`: The rounding operation (ROUND, ROUNDUP, ROUNDDOWN).
+    - **Type**: `String`
+- **Attachments**:
+  - `NUM`: The number to round. This can be any block that returns a value.
+
+### 22. **math_random_int**
+
+- **Name**: math_random_int
+- **Description**: Generates a random integer between two specified values.
+- **Required Fields**: None
+- **Attachments**:
+  - `FROM`: The lower bound of the random number range. This can be any block that returns a value.
+  - `TO`: The upper bound of the random number range. This can be any block that returns a value.
+
+### 23. **controls_repeat_ext**
+
+- **Name**: controls_repeat_ext
+- **Description**: Repeats a set of statements a specified number of times.
+- **Required Fields**: None
+- **Attachments**:
+  - `TIMES`: The number of times to repeat the statements. This can be any block that returns a value.
+  - `DO`: The statements to repeat. This can be any block that contains a set of statements.
+
+### 24. **controls_for**
+
+- **Name**: controls_for
+- **Description**: Executes a set of statements in a loop, using a counter variable.
+- **Required Fields**:
+  - `VAR`: The variable to use as the counter.
+    - **Type**: `String`
+- **Attachments**:
+  - `FROM`: The initial value of the counter. This can be any block that returns a value.
+  - `TO`: The final value of the counter. This can be any block that returns a value.
+  - `BY`: The increment value. This can be any block that returns a value.
+  - `DO`: The statements to repeat. This can be any block that contains a set of statements.
+
+### 25. **controls_whileUntil**
+
+- **Name**: controls_whileUntil
+- **Description**: Repeats a set of statements while or until a condition is true.
+- **Required Fields**:
+  - `MODE`: The loop mode ("WHILE" or "UNTIL").
+    - **Type**: `String`
+- **Attachments**:
+  - `BOOL`: The condition to check. This can be any block that returns a boolean value.
+  - `DO`: The statements to repeat. This can be any block that contains a set of statements.
+
+### 26. **controls_flow_statements**
+
+- **Name**: controls_flow_statements
+- **Description**: Alters the flow of the loop, either breaking out of it or continuing to the next iteration.
+- **Required Fields**:
+  - `FLOW`: The flow control statement ("BREAK" or "CONTINUE").
+    - **Type**: `String`
+- **Attachments**: None
+
+### 27. **controls_if**
+
+- **Name**: controls_if
+- **Description**: Executes statements based on whether a condition is true.
+- **Required Fields**: None
+- **Attachments**:
+  - `IF0`: The condition to check. This can be any block that returns a boolean value.
+  - `DO0`: The statements to execute if the condition is true. This can be any block that contains a set of statements.
+  - Additional conditions and statements can be added as `IF1`, `DO1`, etc.
+
+### 28. **logic_boolean**
+
+- **Name**: logic_boolean
+- **Description**: Returns a boolean value (TRUE or FALSE).
+- **Required Fields**:
+  - `BOOL`: The boolean value ("TRUE" or "FALSE").
+    - **Type**: `String`
+- **Attachments**: None
+
+### 29. **logic_compare**
+
+- **Name**: logic_compare
+- **Description**: Compares two values and returns a boolean result.
+- **Required Fields**:
+  - `OP`: The comparison operator (EQ, NEQ, LT, LTE, GT, GTE).
+    - **Type**: `String`
+- **Attachments**:
+  - `A`: The first value to compare. This can be any block that returns a value.
+  - `B`: The second value to compare. This can be any block that returns a value.
+
+### 30. **logic_operation**
+
+- **Name**: logic_operation
+- **Description**: Performs a logical operation (AND, OR) between two boolean values.
+- **Required Fields**:
+  - `OP`: The logical operator (AND, OR).
+    - **Type**: `String`
+- **Attachments**:
+  - `A`: The first boolean value. This can be any block that returns a boolean value.
+  - `B`: The second boolean value. This can be any block that returns a boolean value.
+
+### 31. **custom_code**
+
+- **Name**: custom_code
+- **Description**: Allows for the inclusion of custom code snippets in the program.
+
+- **Required Fields**: None
+- **Attachments**:
+  - `TEXT`: The custom code to include. This can be a string of code.
