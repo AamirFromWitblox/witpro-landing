@@ -21,6 +21,8 @@ import {
   Globe,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { IMAGES } from "@/assets";
 
 export default function LandingPage() {
   const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
@@ -114,11 +116,15 @@ export default function LandingPage() {
           transition={{ duration: 0.8 }}
           className="rounded-lg bg-card p-8 shadow-lg"
         >
-          <img
-            src="/placeholder.svg?height=400&width=800"
+          <Image
+            src={IMAGES.appScreenshot}
             alt="WitPro Interface"
+            width={1620}
+            height={1200}
+            quality={100}
             className="mb-8 h-auto w-full rounded-lg transition-transform hover:scale-105"
           />
+
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <div>
               <h4 className="mb-4 text-2xl font-semibold">
