@@ -38,7 +38,7 @@ export default function LandingPage() {
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="mb-4 text-5xl font-extrabold"
+          className="mb-4 text-3xl font-extrabold md:text-5xl"
         >
           Arduino Development Reimagined
         </motion.h2>
@@ -46,7 +46,7 @@ export default function LandingPage() {
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="mb-8 text-xl"
+          className="mb-8 text-base md:text-xl"
         >
           WitPro: The visual Arduino IDE that transforms complex coding into
           simple drag-and-drop actions
@@ -61,7 +61,7 @@ export default function LandingPage() {
             className="group text-lg transition-transform hover:scale-105"
             asChild
           >
-            <Link href="/">
+            <Link href="/download">
               Create Now
               <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
@@ -81,17 +81,17 @@ export default function LandingPage() {
         </motion.h3>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <FeatureCard
-            icon={<PuzzleIcon className="text-primary mb-4 h-12 w-12" />}
+            icon={<PuzzleIcon className="mb-4 h-12 w-12 text-primary" />}
             title="Intuitive Drag-and-Drop Interface"
             description="Build Arduino projects visually with our Blockly-based interface, making complex programming accessible to everyone."
           />
           <FeatureCard
-            icon={<Code className="text-primary mb-4 h-12 w-12" />}
+            icon={<Code className="mb-4 h-12 w-12 text-primary" />}
             title="Seamless Code Generation"
             description="Convert your visual blocks into optimized Arduino code instantly, bridging the gap between concept and implementation."
           />
           <FeatureCard
-            icon={<Zap className="text-primary mb-4 h-12 w-12" />}
+            icon={<Zap className="mb-4 h-12 w-12 text-primary" />}
             title="Rapid Prototyping"
             description="Accelerate your development process, test ideas quickly, and bring your innovations to life faster than ever before."
           />
@@ -112,7 +112,7 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="bg-card rounded-lg p-8 shadow-lg"
+          className="rounded-lg bg-card p-8 shadow-lg"
         >
           <img
             src="/placeholder.svg?height=400&width=800"
@@ -158,28 +158,28 @@ export default function LandingPage() {
         </motion.h3>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
           <FeatureDetail
-            icon={<Users className="text-primary h-8 w-8" />}
+            icon={<Users className="h-8 w-8 text-primary" />}
             title="Multi-User Collaboration"
             description="Work on projects with team members in real-time, fostering collaboration and knowledge sharing."
             setHovered={setHoveredFeature}
             isHovered={hoveredFeature === "Multi-User Collaboration"}
           />
           <FeatureDetail
-            icon={<Book className="text-primary h-8 w-8" />}
+            icon={<Book className="h-8 w-8 text-primary" />}
             title="Comprehensive Library Support"
             description="Access a wide range of pre-built blocks for popular Arduino libraries, sensors, and actuators."
             setHovered={setHoveredFeature}
             isHovered={hoveredFeature === "Comprehensive Library Support"}
           />
           <FeatureDetail
-            icon={<Globe className="text-primary h-8 w-8" />}
+            icon={<Globe className="h-8 w-8 text-primary" />}
             title="Cross-Platform Compatibility"
             description="Develop on Windows, macOS, or Linux - WitPro works seamlessly across all major operating systems."
             setHovered={setHoveredFeature}
             isHovered={hoveredFeature === "Cross-Platform Compatibility"}
           />
           <FeatureDetail
-            icon={<CheckCircle className="text-primary h-8 w-8" />}
+            icon={<CheckCircle className="h-8 w-8 text-primary" />}
             title="Built-in Error Checking"
             description="Catch and resolve issues early with real-time syntax and logic checking as you build your projects."
             setHovered={setHoveredFeature}
@@ -268,7 +268,7 @@ export default function LandingPage() {
           Frequently Asked Questions
         </motion.h3>
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
+          <AccordionItem value="item-1" className="text-start">
             <AccordionTrigger>
               Is WitPro suitable for beginners?
             </AccordionTrigger>
@@ -279,7 +279,7 @@ export default function LandingPage() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger>
+            <AccordionTrigger className="text-start">
               Can I export my projects to the traditional Arduino IDE?
             </AccordionTrigger>
             <AccordionContent>
@@ -306,7 +306,7 @@ export default function LandingPage() {
         transition={{ duration: 0.8 }}
         className="py-20 text-center"
       >
-        <h3 className="mb-4 text-4xl font-bold">
+        <h3 className="mb-4 text-3xl font-bold md:text-4xl">
           Ready to Transform Your Arduino Development?
         </h3>
         <p className="mb-8 text-xl">
@@ -408,7 +408,7 @@ interface ComparisonRowProps {
 function ComparisonRow({ feature, witpro, traditional }: ComparisonRowProps) {
   return (
     <motion.tr
-      className="border-muted border-b"
+      className="border-b border-muted"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -437,7 +437,7 @@ function Testimonial({ quote, author, role }: TestimonialProps) {
         <CardContent className="pt-6">
           <p className="mb-4 italic">&apos;{quote}&apos;</p>
           <p className="font-semibold">{author}</p>
-          <p className="text-muted-foreground text-sm">{role}</p>
+          <p className="text-sm text-muted-foreground">{role}</p>
         </CardContent>
       </Card>
     </motion.div>

@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <div className="from-background to-secondary min-h-screen bg-gradient-to-b px-20">
+        <div className="min-h-screen bg-gradient-to-b from-background to-secondary px-10 md:px-20">
           {children}
           <Footer />
         </div>
