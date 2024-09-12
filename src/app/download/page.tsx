@@ -6,12 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Download, Monitor, Apple, Terminal, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function DownloadPage() {
   return (
-    <main className="container mx-auto py-12">
+    <main className="container py-12 mx-auto">
       <motion.h1
-        className="mb-8 text-center text-4xl font-bold"
+        className="mb-8 text-4xl font-bold text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -19,7 +20,7 @@ export default function DownloadPage() {
         Download WitPro
       </motion.h1>
       <motion.p
-        className="mb-12 text-center text-xl"
+        className="mb-12 text-xl text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -27,7 +28,7 @@ export default function DownloadPage() {
         Choose your operating system to get started with WitPro
       </motion.p>
 
-      <Tabs defaultValue="windows" className="mx-auto w-full max-w-3xl">
+      <Tabs defaultValue="windows" className="w-full max-w-3xl mx-auto">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="windows">Windows</TabsTrigger>
           <TabsTrigger value="mac">macOS</TabsTrigger>
@@ -35,7 +36,7 @@ export default function DownloadPage() {
         </TabsList>
         <TabsContent value="windows">
           <DownloadCard
-            icon={<Monitor className="text-primary mb-4 h-12 w-12" />}
+            icon={<Monitor className="w-12 h-12 mb-4 text-primary" />}
             title="WitPro for Windows"
             version="v1.2.3"
             requirements="Windows 10 or later"
@@ -44,7 +45,7 @@ export default function DownloadPage() {
         </TabsContent>
         <TabsContent value="mac">
           <DownloadCard
-            icon={<Apple className="text-primary mb-4 h-12 w-12" />}
+            icon={<Apple className="w-12 h-12 mb-4 text-primary" />}
             title="WitPro for macOS"
             version="v1.2.3"
             requirements="macOS 10.15 or later"
@@ -54,7 +55,7 @@ export default function DownloadPage() {
         </TabsContent>
         <TabsContent value="linux">
           <DownloadCard
-            icon={<Terminal className="text-primary mb-4 h-12 w-12" />}
+            icon={<Terminal className="w-12 h-12 mb-4 text-primary" />}
             title="WitPro for Linux"
             version="v1.2.3"
             requirements="Ubuntu 20.04, Fedora 32, or compatible"
@@ -65,7 +66,7 @@ export default function DownloadPage() {
       </Tabs>
 
       <section className="mt-20">
-        <h2 className="mb-8 text-center text-3xl font-bold">
+        <h2 className="mb-8 text-3xl font-bold text-center">
           Why Choose WitPro?
         </h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -91,10 +92,13 @@ export default function DownloadPage() {
         </p>
         <Button
           size="lg"
-          className="group text-lg transition-transform hover:scale-105"
+          className="text-lg transition-transform group hover:scale-105"
+          asChild
         >
-          View Documentation{" "}
-          <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
+          <Link href="/documentation">
+            View Documentation
+            <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
+          </Link>
         </Button>
       </section>
     </main>
@@ -139,7 +143,7 @@ function DownloadCard({
         <Button asChild className="w-full" disabled={comingSoon}>
           {!comingSoon && (
             <a href={downloadLink} download>
-              <Download className="mr-2 h-4 w-4" />{" "}
+              <Download className="w-4 h-4 mr-2" />{" "}
               {comingSoon ? "Notify Me" : "Download Now"}
             </a>
           )}

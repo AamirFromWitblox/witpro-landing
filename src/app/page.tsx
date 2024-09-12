@@ -60,11 +60,11 @@ export default function LandingPage() {
         >
           <Button
             size="lg"
-            className="group text-lg transition-transform hover:scale-105"
+            className="text-lg transition-transform group hover:scale-105"
             asChild
           >
             <Link href="/download">
-              Create Now
+              Download Now
               <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
@@ -77,23 +77,23 @@ export default function LandingPage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center text-3xl font-bold"
+          className="mb-12 text-3xl font-bold text-center"
         >
           Why WitPro is Your Go-To Arduino Development Tool
         </motion.h3>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <FeatureCard
-            icon={<PuzzleIcon className="mb-4 h-12 w-12 text-primary" />}
+            icon={<PuzzleIcon className="w-12 h-12 mb-4 text-primary" />}
             title="Intuitive Drag-and-Drop Interface"
             description="Build Arduino projects visually with our Blockly-based interface, making complex programming accessible to everyone."
           />
           <FeatureCard
-            icon={<Code className="mb-4 h-12 w-12 text-primary" />}
+            icon={<Code className="w-12 h-12 mb-4 text-primary" />}
             title="Seamless Code Generation"
             description="Convert your visual blocks into optimized Arduino code instantly, bridging the gap between concept and implementation."
           />
           <FeatureCard
-            icon={<Zap className="mb-4 h-12 w-12 text-primary" />}
+            icon={<Zap className="w-12 h-12 mb-4 text-primary" />}
             title="Rapid Prototyping"
             description="Accelerate your development process, test ideas quickly, and bring your innovations to life faster than ever before."
           />
@@ -106,7 +106,7 @@ export default function LandingPage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center text-3xl font-bold"
+          className="mb-12 text-3xl font-bold text-center"
         >
           Experience the Power of Visual Programming
         </motion.h3>
@@ -114,7 +114,7 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="rounded-lg bg-card p-8 shadow-lg"
+          className="p-8 rounded-lg shadow-lg bg-card"
         >
           <Image
             src={IMAGES.appScreenshot}
@@ -122,7 +122,7 @@ export default function LandingPage() {
             width={1620}
             height={1200}
             quality={100}
-            className="mb-8 h-auto w-full rounded-lg transition-transform hover:scale-105"
+            className="w-full h-auto mb-8 transition-transform rounded-lg hover:scale-105"
           />
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -158,34 +158,34 @@ export default function LandingPage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center text-3xl font-bold"
+          className="mb-12 text-3xl font-bold text-center"
         >
           Powerful Features for Every Developer
         </motion.h3>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
           <FeatureDetail
-            icon={<Users className="h-8 w-8 text-primary" />}
+            icon={<Users className="w-8 h-8 text-primary" />}
             title="Multi-User Collaboration"
             description="Work on projects with team members in real-time, fostering collaboration and knowledge sharing."
             setHovered={setHoveredFeature}
             isHovered={hoveredFeature === "Multi-User Collaboration"}
           />
           <FeatureDetail
-            icon={<Book className="h-8 w-8 text-primary" />}
+            icon={<Book className="w-8 h-8 text-primary" />}
             title="Comprehensive Library Support"
             description="Access a wide range of pre-built blocks for popular Arduino libraries, sensors, and actuators."
             setHovered={setHoveredFeature}
             isHovered={hoveredFeature === "Comprehensive Library Support"}
           />
           <FeatureDetail
-            icon={<Globe className="h-8 w-8 text-primary" />}
+            icon={<Globe className="w-8 h-8 text-primary" />}
             title="Cross-Platform Compatibility"
             description="Develop on Windows, macOS, or Linux - WitPro works seamlessly across all major operating systems."
             setHovered={setHoveredFeature}
             isHovered={hoveredFeature === "Cross-Platform Compatibility"}
           />
           <FeatureDetail
-            icon={<CheckCircle className="h-8 w-8 text-primary" />}
+            icon={<CheckCircle className="w-8 h-8 text-primary" />}
             title="Built-in Error Checking"
             description="Catch and resolve issues early with real-time syntax and logic checking as you build your projects."
             setHovered={setHoveredFeature}
@@ -200,7 +200,7 @@ export default function LandingPage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center text-3xl font-bold"
+          className="mb-12 text-3xl font-bold text-center"
         >
           WitPro vs. Traditional Arduino IDE
         </motion.h3>
@@ -245,19 +245,19 @@ export default function LandingPage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center text-3xl font-bold"
+          className="mb-12 text-3xl font-bold text-center"
         >
           What Our Users Say
         </motion.h3>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <Testimonial
             quote="WitPro has revolutionized how I teach Arduino programming. My students grasp concepts much faster now!"
-            author="Dr. Emily Chen"
+            author="Abhisay Shetty"
             role="Professor of Electrical Engineering"
           />
           <Testimonial
             quote="As a hobbyist, WitPro made it possible for me to create complex projects I never thought I could. It's a game-changer!"
-            author="Mark Johnson"
+            author="Rishabh Sinha"
             role="DIY Enthusiast"
           />
         </div>
@@ -269,7 +269,7 @@ export default function LandingPage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center text-3xl font-bold"
+          className="mb-12 text-3xl font-bold text-center"
         >
           Frequently Asked Questions
         </motion.h3>
@@ -321,7 +321,7 @@ export default function LandingPage() {
         </p>
         <Button
           size="lg"
-          className="group text-lg transition-transform hover:scale-105"
+          className="text-lg transition-transform group hover:scale-105"
           asChild
         >
           <Link href="/download">
@@ -347,7 +347,7 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="group h-full transition-transform hover:scale-105">
+      <Card className="h-full transition-transform group hover:scale-105">
         <CardHeader className="text-center">
           <motion.div
             whileHover={{ rotate: 360 }}

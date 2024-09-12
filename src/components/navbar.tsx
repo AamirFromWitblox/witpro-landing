@@ -30,6 +30,7 @@ const Navbar = () => {
           <NavButton link="/#features">Features</NavButton>
           <NavButton link="/#testimonials">Testimonials</NavButton>
           <NavButton link="/#faq">FAQ</NavButton>
+          <NavButton link="/documentation">Documentation</NavButton>
           <Button
             variant="outline"
             className="transition-transform hover:scale-105"
