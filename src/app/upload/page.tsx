@@ -20,7 +20,7 @@ const Upload = () => {
 
   useEffect(() => {
     const storedPass = localStorage.getItem("p");
-    if (!storedPass) {
+    if (!storedPass || storedPass !== PASSWORD) {
       const pass = prompt("Enter password");
       if (pass !== PASSWORD) {
         window.location.href = "/";
