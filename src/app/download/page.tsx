@@ -49,7 +49,7 @@ export default function DownloadPage() {
             title="WitPro for macOS"
             version="v0.9.5"
             requirements="macOS 10.15 or later"
-            downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro-0.9.5-arm64.dmg?alt=media&token=a03e1b5a-9668-44a2-a2ef-875039f10704"
+            downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro-0.9.5-universal.dmg?alt=media&token=627ce143-e891-4e93-bf63-2355657fa455"
           />
         </TabsContent>
         <TabsContent value="linux">
