@@ -19,7 +19,7 @@ export const getDownloadLinks = async () => {
   const windowsLatest = windowsSnapshot.docs[0].data().download_url;
 
   const macAlt =
-    "https://firebasestorage.googleapis.com/v0/b/witblox-5ae68.appspot.com/o/wit-pro%2Fwit-pro-0.9.8.dmg?alt=media&token=10a1eb6d-0951-4458-895b-d33c8cba3a74";
+    "https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro-0.9.5-arm64.dmg?alt=media&token=a03e1b5a-9668-44a2-a2ef-875039f10704";
 
   return {
     windows: windowsLatest,

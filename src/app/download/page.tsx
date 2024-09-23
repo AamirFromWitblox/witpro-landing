@@ -10,9 +10,9 @@ import Link from "next/link";
 
 export default function DownloadPage() {
   return (
-    <main className="container py-12 mx-auto">
+    <main className="container mx-auto py-12">
       <motion.h1
-        className="mb-8 text-4xl font-bold text-center"
+        className="mb-8 text-center text-4xl font-bold"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -20,7 +20,7 @@ export default function DownloadPage() {
         Download WitPro
       </motion.h1>
       <motion.p
-        className="mb-12 text-xl text-center"
+        className="mb-12 text-center text-xl"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -28,7 +28,7 @@ export default function DownloadPage() {
         Choose your operating system to get started with WitPro
       </motion.p>
 
-      <Tabs defaultValue="windows" className="w-full max-w-3xl mx-auto">
+      <Tabs defaultValue="windows" className="mx-auto w-full max-w-3xl">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="windows">Windows</TabsTrigger>
           <TabsTrigger value="mac">macOS</TabsTrigger>
@@ -36,28 +36,27 @@ export default function DownloadPage() {
         </TabsList>
         <TabsContent value="windows">
           <DownloadCard
-            icon={<Monitor className="w-12 h-12 mb-4 text-primary" />}
+            icon={<Monitor className="mb-4 h-12 w-12 text-primary" />}
             title="WitPro for Windows"
-            version="v1.2.3"
+            version="v0.9.5"
             requirements="Windows 10 or later"
             downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro%20Setup%200.9.3.exe?alt=media&token=003188ee-13c0-4058-bb46-ca4de07d1864"
           />
         </TabsContent>
         <TabsContent value="mac">
           <DownloadCard
-            icon={<Apple className="w-12 h-12 mb-4 text-primary" />}
+            icon={<Apple className="mb-4 h-12 w-12 text-primary" />}
             title="WitPro for macOS"
-            version="v1.2.3"
+            version="v0.9.5"
             requirements="macOS 10.15 or later"
-            downloadLink="#"
-            comingSoon
+            downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro-0.9.5-arm64.dmg?alt=media&token=a03e1b5a-9668-44a2-a2ef-875039f10704"
           />
         </TabsContent>
         <TabsContent value="linux">
           <DownloadCard
-            icon={<Terminal className="w-12 h-12 mb-4 text-primary" />}
+            icon={<Terminal className="mb-4 h-12 w-12 text-primary" />}
             title="WitPro for Linux"
-            version="v1.2.3"
+            version="v0.9.5"
             requirements="Ubuntu 20.04, Fedora 32, or compatible"
             downloadLink="#"
             comingSoon
@@ -66,7 +65,7 @@ export default function DownloadPage() {
       </Tabs>
 
       <section className="mt-20">
-        <h2 className="mb-8 text-3xl font-bold text-center">
+        <h2 className="mb-8 text-center text-3xl font-bold">
           Why Choose WitPro?
         </h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -92,7 +91,7 @@ export default function DownloadPage() {
         </p>
         <Button
           size="lg"
-          className="text-lg transition-transform group hover:scale-105"
+          className="group text-lg transition-transform hover:scale-105"
           asChild
         >
           <Link href="/documentation">
@@ -143,7 +142,7 @@ function DownloadCard({
         <Button asChild className="w-full" disabled={comingSoon}>
           {!comingSoon && (
             <a href={downloadLink} download>
-              <Download className="w-4 h-4 mr-2" />{" "}
+              <Download className="mr-2 h-4 w-4" />{" "}
               {comingSoon ? "Notify Me" : "Download Now"}
             </a>
           )}
