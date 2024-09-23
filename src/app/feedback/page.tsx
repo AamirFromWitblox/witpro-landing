@@ -5,26 +5,74 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Upload, Send } from "lucide-react";
+import { Send } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { feedbackSchema, FeedbackType } from "@/types/feedback";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { db, storage } from "@/firebase";
+import { toast } from "sonner";
+import { Progress } from "@/components/ui/progress";
+import { collection, addDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 export default function FeedbackPage() {
-  const [screenshots, setScreenshots] = useState<File[]>([]);
+  const [ssUploadProgress, setSsUploadProgress] = useState(0);
+  const router = useRouter();
+
+  const form = useForm<FeedbackType>({
+    resolver: zodResolver(feedbackSchema),
+  });
 
   const handleScreenshotUpload = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (event.target.files) {
-      setScreenshots(Array.from(event.target.files));
-    }
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const storageRef = ref(storage, "feedback/" + file.name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+        setSsUploadProgress(progress);
+      },
+      (error) => {
+        toast.error("Error uploading file, Please try again later!", {
+          description: error.message,
+        });
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          form.setValue("screenshots", [downloadURL]);
+        });
+      }
+    );
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Here you would typically send the form data to your server
-    console.log("Form submitted");
-  };
+  async function handleSubmit(values: FeedbackType) {
+    try {
+      await addDoc(collection(db, "feedbacks"), values);
+      toast.success("Feedback has been succesfully submitted!");
+      router.push("/");
+    } catch (err) {
+      toast.error(`An error occured while saving the feedback!`);
+    }
+  }
 
   return (
     <main className="container mx-auto px-4 py-12">
@@ -50,87 +98,137 @@ export default function FeedbackPage() {
           <CardTitle>Feedback Form</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Your name" required />
-            </div>
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Your email"
-                required
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleSubmit)}
+              className="space-y-6"
+            >
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div>
-              <Label>Feedback Type</Label>
-              <RadioGroup defaultValue="general" className="flex space-x-4">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="general" id="general" />
-                  <Label htmlFor="general">General</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="bug" id="bug" />
-                  <Label htmlFor="bug">Bug Report</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="feature" id="feature" />
-                  <Label htmlFor="feature">Feature Request</Label>
-                </div>
-              </RadioGroup>
-            </div>
-            <div>
-              <Label htmlFor="feedback">Your Feedback</Label>
-              <Textarea
-                id="feedback"
-                placeholder="Please provide your feedback here"
-                required
+
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div>
-              <Label htmlFor="screenshots">Upload Screenshots (optional)</Label>
-              <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pb-6 pt-5">
-                <div className="space-y-1 text-center">
-                  <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                  <div className="flex text-sm text-gray-600">
-                    <label
-                      htmlFor="screenshots"
-                      className="hover:text-primary-dark relative cursor-pointer rounded-md bg-white font-medium text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2"
-                    >
-                      <span>Upload files</span>
-                      <Input
-                        id="screenshots"
-                        type="file"
-                        className="sr-only"
-                        multiple
-                        accept="image/*"
-                        onChange={handleScreenshotUpload}
+
+              <FormField
+                control={form.control}
+                name="type"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>Feedback Type</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex flex-col space-y-1"
+                      >
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="general" />
+                          </FormControl>
+                          <FormLabel className="font-normal">General</FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="bug-report" />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            Bug Report
+                          </FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="feature-request" />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            Feature Request
+                          </FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="feedback"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Your Feedback</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Please provide your feedback here"
+                        className="resize-none"
+                        {...field}
                       />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    PNG, JPG, GIF up to 10MB
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="screenshots"
+                render={() => (
+                  <FormItem>
+                    <FormLabel htmlFor="file" className="text-sm font-medium">
+                      Upload Screenshots (optional)
+                    </FormLabel>
+                    <Input
+                      id="file"
+                      type="file"
+                      placeholder="File"
+                      accept="image/*"
+                      onChange={handleScreenshotUpload}
+                    />
+                  </FormItem>
+                )}
+              />
+              {ssUploadProgress > 0 && (
+                <div>
+                  <Progress value={ssUploadProgress} />
+                  <p className="flex justify-end text-sm">
+                    {ssUploadProgress.toFixed(0)}% Uploaded
                   </p>
                 </div>
-              </div>
-              {screenshots.length > 0 && (
-                <div className="mt-2">
-                  <p>{screenshots.length} file(s) selected</p>
-                  <ul className="list-inside list-disc">
-                    {screenshots.map((file, index) => (
-                      <li key={index}>{file.name}</li>
-                    ))}
-                  </ul>
-                </div>
               )}
-            </div>
-            <Button type="submit" className="w-full">
-              <Send className="mr-2 h-4 w-4" /> Submit Feedback
-            </Button>
-          </form>
+
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={
+                  form.formState.isSubmitting ||
+                  (ssUploadProgress > 0 && ssUploadProgress < 100)
+                }
+              >
+                <Send className="mr-2 h-4 w-4" /> Submit Feedback
+              </Button>
+            </form>
+          </Form>
         </CardContent>
       </Card>
     </main>
