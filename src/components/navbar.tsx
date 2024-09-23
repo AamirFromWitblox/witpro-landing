@@ -20,18 +20,28 @@ const Navbar = () => {
     >
       <nav className="flex items-center justify-center md:justify-between">
         <motion.h1
-          className="text-2xl font-bold"
+          className="flex items-center justify-center gap-2 text-2xl font-bold"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Link href="/">WitPro</Link>
+          {/* <Image
+            src={IMAGES.logo}
+            alt="logo"
+            height={100}
+            width={100}
+            className="border rounded h-14 w-14"
+          /> */}
+          <Link href="/">
+            <span className="text-blue-500">Wit</span>
+            <span className="text-gray-700">Pro</span>
+          </Link>
         </motion.h1>
         <div className="hidden space-x-4 md:block">
           <NavButton link="/#features">Features</NavButton>
           <NavButton link="/#testimonials">Testimonials</NavButton>
           <NavButton link="/#faq">FAQ</NavButton>
-          <NavButton link="/documentation">Documentation</NavButton>
           <NavButton link="/feedback">Feedback</NavButton>
+          <NavButton link="/docs">Documentation</NavButton>
           <Button
             variant="outline"
             className="transition-transform hover:scale-105"
