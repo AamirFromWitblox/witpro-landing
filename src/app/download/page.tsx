@@ -1,18 +1,13 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Download, Monitor, Apple, Terminal, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useQueryState } from "nuqs";
-import { useRouter } from "next/navigation";
+import DownloadTabs from "./DownloadTabs";
 
 export default function DownloadPage() {
-  const [platform, setPlatform] = useQueryState("platform");
-
   return (
     <main className="container mx-auto py-12">
       <motion.h1
@@ -32,48 +27,9 @@ export default function DownloadPage() {
         Choose your operating system to get started with WitPro
       </motion.p>
 
-      <Tabs
-        defaultValue={platform ?? "windows"}
-        className="mx-auto w-full max-w-3xl"
-        onValueChange={setPlatform}
-      >
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="windows">Windows</TabsTrigger>
-          <TabsTrigger value="mac">macOS</TabsTrigger>
-          <TabsTrigger value="linux">Linux</TabsTrigger>
-        </TabsList>
-        <TabsContent value="windows">
-          <DownloadCard
-            icon={<Monitor className="mb-4 h-12 w-12 text-primary" />}
-            title="WitPro for Windows"
-            version="v0.9.5"
-            requirements="Windows 10 or later"
-            downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro%20Setup%200.9.3.exe?alt=media&token=003188ee-13c0-4058-bb46-ca4de07d1864"
-            platform="windows"
-          />
-        </TabsContent>
-        <TabsContent value="mac">
-          <DownloadCard
-            icon={<Apple className="mb-4 h-12 w-12 text-primary" />}
-            title="WitPro for macOS"
-            version="v0.9.5"
-            requirements="macOS 10.15 or later"
-            downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro-0.9.5-universal.dmg?alt=media&token=627ce143-e891-4e93-bf63-2355657fa455"
-            platform="mac"
-          />
-        </TabsContent>
-        <TabsContent value="linux">
-          <DownloadCard
-            icon={<Terminal className="mb-4 h-12 w-12 text-primary" />}
-            title="WitPro for Linux"
-            version="v0.9.5"
-            requirements="Ubuntu 20.04, Fedora 32, or compatible"
-            downloadLink="#"
-            platform="linux"
-            comingSoon
-          />
-        </TabsContent>
-      </Tabs>
+      <Suspense>
+        <DownloadTabs />
+      </Suspense>
 
       <section className="mt-20">
         <h2 className="mb-8 text-center text-3xl font-bold">
@@ -112,69 +68,6 @@ export default function DownloadPage() {
         </Button>
       </section>
     </main>
-  );
-}
-
-interface DownloadCardProps {
-  icon: React.ReactNode;
-  title: string;
-  version: string;
-  requirements: string;
-  downloadLink: string;
-  comingSoon?: boolean;
-  platform: "mac" | "windows" | "linux";
-}
-
-function DownloadCard({
-  icon,
-  title,
-  version,
-  requirements,
-  downloadLink,
-  comingSoon,
-  platform,
-}: DownloadCardProps) {
-  const router = useRouter();
-
-  return (
-    <Card className="mt-4">
-      <CardHeader className="text-center">
-        <motion.div
-          whileHover={{ rotate: 360 }}
-          transition={{ duration: 0.5 }}
-          className="w-min"
-        >
-          {icon}
-        </motion.div>
-        <CardTitle className="flex items-center justify-center gap-2">
-          {title}
-          {comingSoon && <Badge variant="secondary">Coming Soon</Badge>}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="text-center">
-        <p className="mb-2">Version: {version}</p>
-        <p className="mb-4">System Requirements: {requirements}</p>
-        <Button
-          asChild
-          className="w-full"
-          disabled={comingSoon}
-          onClick={() => {
-            setTimeout(() => {
-              router.push(
-                `docs/installation/${platform}#step-3:-bypass-gatekeeper`
-              );
-            }, 2000);
-          }}
-        >
-          {!comingSoon && (
-            <a href={downloadLink} download>
-              <Download className="mr-2 h-4 w-4" />{" "}
-              {comingSoon ? "Notify Me" : "Download Now"}
-            </a>
-          )}
-        </Button>
-      </CardContent>
-    </Card>
   );
 }
 
