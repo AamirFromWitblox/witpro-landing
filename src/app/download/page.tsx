@@ -7,8 +7,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Download, Monitor, Apple, Terminal, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useQueryState } from "nuqs";
+import { useRouter } from "next/navigation";
 
 export default function DownloadPage() {
+  const [platform, setPlatform] = useQueryState("platform");
+
   return (
     <main className="container mx-auto py-12">
       <motion.h1
@@ -28,7 +32,11 @@ export default function DownloadPage() {
         Choose your operating system to get started with WitPro
       </motion.p>
 
-      <Tabs defaultValue="windows" className="mx-auto w-full max-w-3xl">
+      <Tabs
+        defaultValue={platform ?? "windows"}
+        className="mx-auto w-full max-w-3xl"
+        onValueChange={setPlatform}
+      >
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="windows">Windows</TabsTrigger>
           <TabsTrigger value="mac">macOS</TabsTrigger>
@@ -41,6 +49,7 @@ export default function DownloadPage() {
             version="v0.9.5"
             requirements="Windows 10 or later"
             downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro%20Setup%200.9.3.exe?alt=media&token=003188ee-13c0-4058-bb46-ca4de07d1864"
+            platform="windows"
           />
         </TabsContent>
         <TabsContent value="mac">
@@ -50,6 +59,7 @@ export default function DownloadPage() {
             version="v0.9.5"
             requirements="macOS 10.15 or later"
             downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro-0.9.5-universal.dmg?alt=media&token=627ce143-e891-4e93-bf63-2355657fa455"
+            platform="mac"
           />
         </TabsContent>
         <TabsContent value="linux">
@@ -59,6 +69,7 @@ export default function DownloadPage() {
             version="v0.9.5"
             requirements="Ubuntu 20.04, Fedora 32, or compatible"
             downloadLink="#"
+            platform="linux"
             comingSoon
           />
         </TabsContent>
@@ -111,6 +122,7 @@ interface DownloadCardProps {
   requirements: string;
   downloadLink: string;
   comingSoon?: boolean;
+  platform: "mac" | "windows" | "linux";
 }
 
 function DownloadCard({
@@ -120,7 +132,10 @@ function DownloadCard({
   requirements,
   downloadLink,
   comingSoon,
+  platform,
 }: DownloadCardProps) {
+  const router = useRouter();
+
   return (
     <Card className="mt-4">
       <CardHeader className="text-center">
@@ -139,7 +154,18 @@ function DownloadCard({
       <CardContent className="text-center">
         <p className="mb-2">Version: {version}</p>
         <p className="mb-4">System Requirements: {requirements}</p>
-        <Button asChild className="w-full" disabled={comingSoon}>
+        <Button
+          asChild
+          className="w-full"
+          disabled={comingSoon}
+          onClick={() => {
+            setTimeout(() => {
+              router.push(
+                `docs/installation/${platform}#step-3:-bypass-gatekeeper`
+              );
+            }, 2000);
+          }}
+        >
           {!comingSoon && (
             <a href={downloadLink} download>
               <Download className="mr-2 h-4 w-4" />{" "}
