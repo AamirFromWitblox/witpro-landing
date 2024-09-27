@@ -41,6 +41,7 @@ const Navbar = () => {
           <NavButton link="/#testimonials">Testimonials</NavButton>
           <NavButton link="/#faq">FAQ</NavButton>
           <NavButton link="/feedback">Feedback</NavButton>
+          <NavButton link="/feedback-internal">Feedback Internal</NavButton>
           <NavButton link="/docs">Documentation</NavButton>
           <Button
             variant="outline"

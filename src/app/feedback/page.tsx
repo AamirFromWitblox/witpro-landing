@@ -8,7 +8,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Send } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { feedbackSchema, FeedbackType } from "@/types/feedback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -19,18 +18,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { db, storage } from "@/firebase";
+import { storage } from "@/firebase";
 import { toast } from "sonner";
 import { Progress } from "@/components/ui/progress";
-import { collection, addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import { saveFeedback } from "@/actions/feedback";
+import { useAction } from "next-safe-action/hooks";
+import { FeedbackFormSchema, FeedbackFormType } from "@/types/feedback";
 
 export default function FeedbackPage() {
   const [ssUploadProgress, setSsUploadProgress] = useState(0);
+  const { executeAsync, isExecuting } = useAction(saveFeedback);
   const router = useRouter();
 
-  const form = useForm<FeedbackType>({
-    resolver: zodResolver(feedbackSchema),
+  const form = useForm<FeedbackFormType>({
+    resolver: zodResolver(FeedbackFormSchema),
   });
 
   const handleScreenshotUpload = (
@@ -64,14 +66,23 @@ export default function FeedbackPage() {
     );
   };
 
-  async function handleSubmit(values: FeedbackType) {
-    try {
-      await addDoc(collection(db, "feedbacks"), values);
-      toast.success("Feedback has been succesfully submitted!");
-      router.push("/");
-    } catch (err) {
-      toast.error(`An error occured while saving the feedback!`);
+  async function handleSubmit(values: FeedbackFormType) {
+    const res = await executeAsync({
+      ...values,
+      createdAt: new Date().getTime(),
+      status: "new",
+    });
+    if (!res?.data) {
+      return toast.error("An error occured");
     }
+
+    if (res.data?.failure) {
+      toast.error(res.data.failure);
+    } else {
+      toast.success(res.data?.success);
+    }
+
+    router.push("/");
   }
 
   return (
@@ -174,7 +185,7 @@ export default function FeedbackPage() {
 
               <FormField
                 control={form.control}
-                name="feedback"
+                name="message"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Your Feedback</FormLabel>
@@ -221,7 +232,7 @@ export default function FeedbackPage() {
                 type="submit"
                 className="w-full"
                 disabled={
-                  form.formState.isSubmitting ||
+                  isExecuting ||
                   (ssUploadProgress > 0 && ssUploadProgress < 100)
                 }
               >
