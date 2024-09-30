@@ -41,7 +41,7 @@ export default function Sidebar() {
               className="w-full justify-start font-normal"
               asChild
             >
-              <Link href="/docs/installation/macos">Mac Installation</Link>
+              <Link href="/docs/installation/mac">Mac Installation</Link>
             </Button>
           </div>
           <Button
