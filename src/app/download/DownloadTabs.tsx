@@ -27,9 +27,9 @@ const DownloadTabs = () => {
         <DownloadCard
           icon={<Monitor className="mb-4 h-12 w-12 text-primary" />}
           title="WitPro for Windows"
-          version="v0.9.5"
+          version="v0.9.6"
           requirements="Windows 10 or later"
-          downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro%20Setup%200.9.3.exe?alt=media&token=003188ee-13c0-4058-bb46-ca4de07d1864"
+          downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro%20Setup%200.9.6.exe?alt=media&token=66e209e9-e3e6-4b46-b4f2-8b534997015b"
           platform="windows"
         />
       </TabsContent>
