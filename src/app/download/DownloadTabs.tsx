@@ -8,9 +8,15 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useDownloads } from "@/hooks/useDownloads";
 
 const DownloadTabs = () => {
+  const { dowloads, error, isLoading } = useDownloads();
   const [platform, setPlatform] = useQueryState("platform");
+
+  if (isLoading) return <h3>Loading...</h3>;
+
+  if (error || !dowloads) return <h3>{error}</h3>;
 
   return (
     <Tabs
@@ -27,10 +33,9 @@ const DownloadTabs = () => {
         <DownloadCard
           icon={<Monitor className="mb-4 h-12 w-12 text-primary" />}
           title="WitPro for Windows"
-          version="v0.9.7"
+          version={`v${dowloads.windows.version}`}
           requirements="Windows 10 or later"
-          // downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro%20Setup%200.9.6.exe?alt=media&token=66e209e9-e3e6-4b46-b4f2-8b534997015b"
-          downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro%20Setup%200.9.7.exe?alt=media&token=c167b78e-99bb-43dd-9d74-d84d23f81a2d"
+          downloadLink={dowloads.windows.url}
           platform="windows"
         />
       </TabsContent>
@@ -38,9 +43,9 @@ const DownloadTabs = () => {
         <DownloadCard
           icon={<Apple className="mb-4 h-12 w-12 text-primary" />}
           title="WitPro for macOS"
-          version="v0.9.5"
+          version={`v${dowloads.mac.version}`}
           requirements="macOS 10.15 or later"
-          downloadLink="https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro-0.9.5-universal.dmg?alt=media&token=627ce143-e891-4e93-bf63-2355657fa455"
+          downloadLink={dowloads.mac.url}
           platform="mac"
         />
       </TabsContent>

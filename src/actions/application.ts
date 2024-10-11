@@ -16,16 +16,18 @@ export const getDownloadLinks = async () => {
   const windowsSnapshot = await getDocs(q);
   const macSnapshot = await getDocs(macQ);
 
-  const windowsLatest = windowsSnapshot.docs[0].data().download_url;
+  const windowsLatest = windowsSnapshot.docs[0].data();
 
-  const macAlt =
-    "https://firebasestorage.googleapis.com/v0/b/witpro-e38b9.appspot.com/o/executables%2Fwit-pro-0.9.5-arm64.dmg?alt=media&token=a03e1b5a-9668-44a2-a2ef-875039f10704";
+  const macLatest = macSnapshot.docs[0].data();
 
   return {
-    windows: windowsLatest,
-    mac:
-      macSnapshot.docs.length === 0
-        ? macAlt
-        : macSnapshot.docs[0].data().download_url,
+    windows: {
+      url: windowsLatest.download_url as string,
+      version: windowsLatest.version as string,
+    },
+    mac: {
+      url: macLatest.download_url as string,
+      version: macLatest.version as string,
+    },
   };
 };
