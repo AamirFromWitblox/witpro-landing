@@ -14,7 +14,7 @@ const DownloadTabs = () => {
   const { dowloads, error, isLoading } = useDownloads();
   const [platform, setPlatform] = useQueryState("platform");
 
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isLoading) return <LoaderSkeleton />;
 
   if (error || !dowloads) return <h3>{error}</h3>;
 
@@ -29,37 +29,39 @@ const DownloadTabs = () => {
         <TabsTrigger value="mac">macOS</TabsTrigger>
         <TabsTrigger value="linux">Linux</TabsTrigger>
       </TabsList>
-      <TabsContent value="windows">
-        <DownloadCard
-          icon={<Monitor className="mb-4 h-12 w-12 text-primary" />}
-          title="WitPro for Windows"
-          version={`v${dowloads.windows.version}`}
-          requirements="Windows 10 or later"
-          downloadLink={dowloads.windows.url}
-          platform="windows"
-        />
-      </TabsContent>
-      <TabsContent value="mac">
-        <DownloadCard
-          icon={<Apple className="mb-4 h-12 w-12 text-primary" />}
-          title="WitPro for macOS"
-          version={`v${dowloads.mac.version}`}
-          requirements="macOS 10.15 or later"
-          downloadLink={dowloads.mac.url}
-          platform="mac"
-        />
-      </TabsContent>
-      <TabsContent value="linux">
-        <DownloadCard
-          icon={<Terminal className="mb-4 h-12 w-12 text-primary" />}
-          title="WitPro for Linux"
-          version="v0.9.5"
-          requirements="Ubuntu 20.04, Fedora 32, or compatible"
-          downloadLink="#"
-          platform="linux"
-          comingSoon
-        />
-      </TabsContent>
+      <>
+        <TabsContent value="windows">
+          <DownloadCard
+            icon={<Monitor className="mb-4 h-12 w-12 text-primary" />}
+            title="WitPro for Windows"
+            version={`v${dowloads.windows.version}`}
+            requirements="Windows 10 or later"
+            downloadLink={dowloads.windows.url}
+            platform="windows"
+          />
+        </TabsContent>
+        <TabsContent value="mac">
+          <DownloadCard
+            icon={<Apple className="mb-4 h-12 w-12 text-primary" />}
+            title="WitPro for macOS"
+            version={`v${dowloads.mac.version}`}
+            requirements="macOS 10.15 or later"
+            downloadLink={dowloads.mac.url}
+            platform="mac"
+          />
+        </TabsContent>
+        <TabsContent value="linux">
+          <DownloadCard
+            icon={<Terminal className="mb-4 h-12 w-12 text-primary" />}
+            title="WitPro for Linux"
+            version="v0.9.5"
+            requirements="Ubuntu 20.04, Fedora 32, or compatible"
+            downloadLink="#"
+            platform="linux"
+            comingSoon
+          />
+        </TabsContent>
+      </>
     </Tabs>
   );
 };
@@ -126,5 +128,16 @@ function DownloadCard({
         </Button>
       </CardContent>
     </Card>
+  );
+}
+
+function LoaderSkeleton() {
+  return (
+    <div className="flex items-center justify-center">
+      <div className="mt-2 w-full animate-pulse self-center sm:w-3/6">
+        <div className="mb-4 h-10 rounded-md bg-gray-200"></div>
+        <div className="mb-4 h-72 rounded-md bg-gray-200"></div>
+      </div>
+    </div>
   );
 }

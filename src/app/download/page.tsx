@@ -61,7 +61,7 @@ export default function DownloadPage() {
           className="group text-lg transition-transform hover:scale-105"
           asChild
         >
-          <Link href="/documentation">
+          <Link href="/docs">
             View Documentation
             <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
           </Link>
