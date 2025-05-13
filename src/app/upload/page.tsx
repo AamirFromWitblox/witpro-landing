@@ -104,9 +104,14 @@ const Upload = () => {
   };
 
   const getPlatformFromFileName = (fileName: string) => {
-    if (fileName.endsWith(".exe")) return "windows";
-    if (fileName.endsWith(".dmg")) return "mac";
-    return "";
+    const platformName = prompt(
+      "What is the platform name? [windows, mac]",
+      "windows"
+    );
+    return platformName;
+    // if (fileName.endsWith(".exe")) return "windows";
+    // if (fileName.endsWith(".dmg")) return "mac";
+    // return "";
   };
 
   const handleUploadCancel = (
@@ -131,7 +136,7 @@ const Upload = () => {
           <>
             <CircularProgressBar percentage={uploadProgress} />
             <h4 className="font-semibold">{file.name}</h4>
-            <h6 className="text-sm">Version: {parseVersion(file.name)}</h6>
+            {/* <h6 className="text-sm">Version: {parseVersion(file.name)}</h6> */}
             <h6 className="text-sm">
               {(file.size / 1024 / 1024).toFixed(0)} MB
             </h6>
@@ -151,7 +156,7 @@ const Upload = () => {
                 <h4 className="font-semibold">
                   Click to upload or drag and drop
                 </h4>
-                <p>Allowed file types: .exe, .dmg</p>
+                <p>Allowed file types: .zip</p>
               </>
             ) : (
               <h4 className="font-semibold text-red-500">{uploadError}</h4>
@@ -163,7 +168,7 @@ const Upload = () => {
         type="file"
         id="file-uploader"
         hidden
-        accept=".exe,.dmg"
+        accept=".zip"
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (!file) return;
