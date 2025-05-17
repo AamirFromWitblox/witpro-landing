@@ -156,7 +156,7 @@ const Upload = () => {
                 <h4 className="font-semibold">
                   Click to upload or drag and drop
                 </h4>
-                <p>Allowed file types: .zip</p>
+                <p>Allowed file types: .exe, .dmg</p>
               </>
             ) : (
               <h4 className="font-semibold text-red-500">{uploadError}</h4>
@@ -168,7 +168,7 @@ const Upload = () => {
         type="file"
         id="file-uploader"
         hidden
-        accept=".zip"
+        accept=".exe,.dmg"
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (!file) return;
